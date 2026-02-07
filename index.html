@@ -1,38 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Payoo</title>
     <!-- css link-->
-     <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/style.css" />
     <!-- daisy UI -->
-     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
     <!-- tailwind -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
-<body class="bg-[#f4f5f7] h-[100vh] flex justify-center items-center outfit-font ">
-    <section class="login-section  w-[402px] h-[317px]  bg-white  rounded-[24px] ">
-
-        <div class="login-img">
-            <img src="./assets/" alt="">
+  </head>
+  <body
+    class="bg-[#f4f5f7] h-[100vh] flex justify-center items-center outfit-font flex-col"
+  >
+    <div
+      class="login-img h-[130px] w-[402px] bg-[url(./assets/bg.png)] bg-cover flex items-center justify-center"
+    >
+      <img src="./assets/Group.png" alt="" />
+    </div>
+    <section class="login-section w-[402px] h-[317px] bg-white rounded-[24px]">
+      <form class="px-[43px] py-[32px]">
+        <div class="mobile-numer-block">
+          <label class="font-medium text-[1rem] text[#080808]" for=""
+            >Mobile Number</label
+          ><br />
+          <input
+            id="phoneNumberId"
+            type="text"
+            placeholder="Enter your number"
+            class="input mt-[10px] rounded-[24px] bg-[#F4F5F7] px-[20px] py-[16px] text[#080808] opacity-[0.4] text-[1rem]"
+          />
         </div>
-        <form class="px-[43px] py-[32px]" >
-            <div class="mobile-numer-block ">
-                <label class="font-medium text-[1rem] text[#080808]" for="">Mobile Number</label><br>
-                <input type="text" placeholder="Enter your number" class="input mt-[10px] rounded-[24px] bg-[#F4F5F7] px-[20px] py-[16px] text[#080808] opacity-[0.4] text-[1rem]" />
-            </div>
-            <div class="mobile-numer-block my-[10px]">
-                <label class="font-medium text[#080808] text-[1rem]" for="">4 Digit Pin</label><br>
-                <input type="text" placeholder="Enter 4 Digit Pin" class="input my-[10px] rounded-[24px] bg-[#F4F5F7] px-[20px] py-[16px] text[#080808] opacity-[0.4] text-[1rem]" />
-            </div>
-            <button class="btn bg-[#0874F2] text-white w-[100%] rounded-[24px] text-[1.25rem] font-semibold py-[16px] ">Login</button>
-        </form>
+        <div class="mobile-numer-block my-[10px]">
+          <label class="font-medium text[#080808] text-[1rem]" for=""
+            >4 Digit Pin</label
+          ><br />
+          <input
+            id="pinNumId"
+            type="text"
+            placeholder="Enter 4 Digit Pin"
+            class="input my-[10px] rounded-[24px] bg-[#F4F5F7] px-[20px] py-[16px] text[#080808] opacity-[0.4] text-[1rem]"
+          />
+        </div>
+        <button id="loginBtn"
+          class="btn bg-[#0874F2] text-white w-[100%] rounded-[24px] text-[1.25rem] font-semibold py-[16px]"
+        >
+          Login
+        </button>
+      </form>
     </section>
-    
 
-    
 
-    
-</body>
+    <script src="./script.js"></script>
+  </body>
 </html>
