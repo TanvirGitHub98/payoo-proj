@@ -1,9 +1,6 @@
 
-
-// Add Money Feature
-const pin="1234";
-
 // Shared Functions
+const pin="1234";
 
 function getInputNumber(id)
 {
@@ -28,24 +25,7 @@ function setInnerText(id,value)
 
 
 
-function setBackGroundColor(id,value)
-{
-    return document.getElementById(id).style.backgroundColor=value;
 
-}
-
-function setBorder(id,value)
-{
-   return document.getElementById(id).style.border=value;
-}
-function setTextColor(id,value)
-{
-    return document.getElementById(id).style.color=value;
-}
-function setFontWeight(id,value)
-{
-    return document.getElementById(id).style.fontWeight=value;
-}
 
 
 // Share toggle function
@@ -60,7 +40,7 @@ function toggleDisplay(id)
 
 }
 
-//bg,border
+//share toggle active
 
 function toggleActive(id) {
   const allDiv = document.getElementsByClassName("all-div");
@@ -95,6 +75,23 @@ function toggleActive(id) {
 
 
 
+// Shared Feature End
+
+// Logout Feature
+
+document.getElementById('loginBtn').addEventListener('click',function(e){
+    window.location.href='./index.html'
+})
+
+
+
+
+// Transaction List
+let transcations=[];
+
+
+
+// Add Money Feature
 
 document.getElementById('add-money-btn').addEventListener('click',function(e){
     e.preventDefault();
@@ -104,9 +101,15 @@ document.getElementById('add-money-btn').addEventListener('click',function(e){
     const addAmount=getInputNumber('add-amount');
     const addPin=getInputValue('add-pin');
 
+    if(addAmount<=0)
+    {
+        alert("Invalid Amount!!!");
+        return;
+    }
+
     if(bankAccNum.length<11)
     {
-        alert("Please Provide a Valid Account Number!");
+        alert("Bank Account Number Must Be Equal or Greater than 11 digit")
         return;
     }
     if(addPin!==pin)
@@ -116,6 +119,13 @@ document.getElementById('add-money-btn').addEventListener('click',function(e){
     }
     const newBalance=addAmount+availableBalance;
     setInnerText('available-balance',newBalance);
+
+    const data={
+        name:'Add Money',
+        date: new Date().toLocaleTimeString()
+    }
+    transcations.push(data)
+    alert("Transaction Successfull!!!")
  
 })
 
@@ -129,9 +139,16 @@ document.getElementById('cash-out-money-btn').addEventListener('click',function(
     const bankAccNum=getInputValue('cash-out-bank-acc-number');
     const cashOutPin=getInputValue('cash-out-pin')
 
+
+    if(withdrawAmount>availableBalance || withdrawAmount<=0)
+    {
+        alert("Invalid Amount");
+        return;
+    }
+
     if(bankAccNum.length<11)
     {
-        alert("Please Provide a Valid Account Number!");
+        alert("Bank Account Number Must Be Equal or Greater than 11 digit")
         return;
     }
     if(cashOutPin!==pin)
@@ -142,6 +159,13 @@ document.getElementById('cash-out-money-btn').addEventListener('click',function(
     const newBalance=availableBalance-withdrawAmount;
     setInnerText('available-balance',newBalance);
 
+    const data={
+        name:'Cash Out',
+        date: new Date().toLocaleTimeString()
+    }
+    transcations.push(data)
+    alert("Transaction Successfull!!!")
+
 
 })
 
@@ -150,6 +174,36 @@ document.getElementById('cash-out-money-btn').addEventListener('click',function(
 
 document.getElementById('transfer-money-btn').addEventListener('click',function(e){
     e.preventDefault();
+    const transferAmount=getInputNumber('transfer-amount');
+    const availableBalance=parseInt(getInnerText('available-balance'));
+    const transferBankAccNum=getInputValue('transfer-bank-acc-number');
+    const transferPin=getInputValue('transfer-pin')
+    if(transferAmount>availableBalance || transferAmount<=0)
+    {
+        alert("Invalid Amount")
+        return;
+    }
+    if(transferBankAccNum<11)
+    {
+        alert("Bank Account Number Must Be Equal or Greater than 11 digit")
+        return;
+    }
+    if(transferPin!==pin)
+    {
+        alert("Invalid Pin!!!")
+        return;
+    }
+
+    const newBalance=availableBalance-transferAmount;
+    setInnerText('available-balance',newBalance);
+
+    const data={
+        name:'Money Transfer',
+        date: new Date().toLocaleTimeString()
+    }
+    transcations.push(data)
+    alert("Transaction Successfull!!!")
+
 
 
 })
@@ -164,7 +218,43 @@ document.getElementById('get-bonus-btn').addEventListener('click',function(e){
 // Pay Bill Feature
 document.getElementById('pay-bill-btn').addEventListener('click',function(e){
     e.preventDefault();
+    
+    const billPayBank=getInputValue('add-pay-bill-bank');
+    const billPayBankAccNum=getInputValue('bill-acc-number');
+    const billPayAmount=getInputNumber('pay-bill-amount');
+    const availableBalance=parseInt(getInnerText('available-balance'));
+    const billPayPin=getInputValue('pay-bill-pin')
+
+    if(billPayBankAccNum<11)
+    {
+        alert("Bank Account Number Must Be Equal or Greater than 11 digit")
+        return;
+    }
+    if(billPayPin!==pin)
+    {
+        alert("Invalid Pin!!!")
+        return;
+    }
+    if(billPayAmount> availableBalance || billPayAmount<=0)
+    {
+        alert("Invalid AMount!!!")
+        return;
+    }
+
+    const newBalance=availableBalance-billPayAmount;
+    setInnerText('available-balance',newBalance);
+
+    const data={
+        name:'Bill Pay',
+        date: new Date().toLocaleTimeString()
+    }
+    transcations.push(data)
+    alert("Transaction Successfull!!!")
+
 })
+
+
+
 
 
 
@@ -175,29 +265,7 @@ document.getElementById('add-money-div').addEventListener('click',function(){
 
 
     toggleDisplay('Add-money-section');
-    toggleActive('add-money-div')
-    // setBackGroundColor('add-money-div','rgba(8, 116, 242, 0.05)');
-    // setBorder('add-money-div','2px solid #0874F2');
-    // setTextColor('add-money-text','#0874F2');
-    // setFontWeight('add-money-text','600');
-
-
-    // setBackGroundColor('cash-out-div','transparent');
-    // setBackGroundColor('transfer-money-div','transparent');
-    // setBackGroundColor('get-bonus-div','transparent');
-    // setBackGroundColor('pay-bill-div','transparent');
-    // setBorder('cash-out-div','1px solid rgba(8, 8, 8, 0.1)');
-    // setBorder('transfer-money-div','1px solid rgba(8, 8, 8, 0.1)');
-    // setBorder('get-bonus-div','1px solid rgba(8, 8, 8, 0.1)');
-    // setBorder('pay-bill-div','1px solid rgba(8, 8, 8, 0.1)');
-    // setTextColor('cash-out-text','black');
-    // setTextColor('transfer-money-text','black');
-    // setTextColor('get-bonus-div','black');
-    // setTextColor('pay-bill-txt','black');
-    // setFontWeight('cash-out-text','400');
-    // setFontWeight('transfer-money-text','400');
-    // setFontWeight('get-bonus-text','400');
-    // setFontWeight('pay-bill-txt','400');
+    toggleActive('add-money-div');
 
 
 })
@@ -205,32 +273,7 @@ document.getElementById('add-money-div').addEventListener('click',function(){
 // click cashout
 document.getElementById('cash-out-div').addEventListener('click',function(){
     toggleDisplay('cash-out-section');
-    toggleActive('cash-out-div')
-
-    // setBackGroundColor('cash-out-div','rgba(8, 116, 242, 0.05)');
-    // setBorder('cash-out-div','2px solid #0874F2');
-    // setTextColor('cash-out-text','#0874F2');
-    // setFontWeight('cash-out-text','600');
-
-
-    // setBackGroundColor('add-money-div','transparent');
-    // setBackGroundColor('transfer-money-div','transparent');
-    // setBackGroundColor('get-bonus-div','transparent');
-    // setBackGroundColor('pay-bill-div','transparent');
-    // setBorder('add-money-div','1px solid rgba(8, 8, 8, 0.1)');
-    // setBorder('transfer-money-div','1px solid rgba(8, 8, 8, 0.1)');
-    // setBorder('get-bonus-div','1px solid rgba(8, 8, 8, 0.1)');
-    // setBorder('pay-bill-div','1px solid rgba(8, 8, 8, 0.1)');
-    // setTextColor('add-money-text','black');
-    // setTextColor('transfer-money-text','black');
-    // setTextColor('get-bonus-text','black');
-    // setTextColor('pay-bill-text','black');
-    // setFontWeight('add-money-text','400');
-    // setFontWeight('transfer-money-text','400');
-    // setFontWeight('get-bonus-text','400');
-    // setFontWeight('pay-bill-text','400');
-   
-  
+    toggleActive('cash-out-div');
 
 })
 
@@ -241,30 +284,7 @@ document.getElementById('cash-out-div').addEventListener('click',function(){
 document.getElementById('transfer-money-div').addEventListener('click',function(){
 
         toggleDisplay('transfer-money-section');
-        toggleActive('transfer-money-div')
-
-        // setBackGroundColor('transfer-money-div','rgba(8, 116, 242, 0.05)');
-        // setBorder('transfer-money-div','2px solid #0874F2');
-        // setTextColor('transfer-money-text','#0874F2');
-        // setFontWeight('transfer-money-text','600');
-
-
-        // setBackGroundColor('add-money-div','transparent');
-        // setBackGroundColor('cash-out-div','transparent');
-        // setBackGroundColor('get-bonus-div','transparent');
-        // setBackGroundColor('pay-bill-div','transparent');
-        // setBorder('add-money-div','1px solid rgba(8, 8, 8, 0.1)');
-        // setBorder('cash-out-div','1px solid rgba(8, 8, 8, 0.1)');
-        // setBorder('get-bonus-div','1px solid rgba(8, 8, 8, 0.1)');
-        // setBorder('pay-bill-div','1px solid rgba(8, 8, 8, 0.1)');
-        // setTextColor('add-money-text','black');
-        // setTextColor('cash-out-text','black');
-        // setTextColor('get-bonus-text','black');
-        // setTextColor('pay-bill-text','black');
-        // setFontWeight('add-money-text','400');
-        // setFontWeight('cash-out-text','400');
-        // setFontWeight('get-bonus-text','400');
-        // setFontWeight('pay-bill-text','400');
+        toggleActive('transfer-money-div');
 
 
     })
@@ -273,61 +293,48 @@ document.getElementById('transfer-money-div').addEventListener('click',function(
 //  Click Get Bonus 
 document.getElementById('get-bonus-div').addEventListener('click',function(){
     toggleDisplay('get-bonus-section');
-    toggleActive('get-bonus-div')
-
-    // setBackGroundColor('get-bonus-div','rgba(8, 116, 242, 0.05)');
-    // setBorder('get-bonus-div','2px solid #0874F2');
-    // setTextColor('get-bonus-text','#0874F2');
-    // setFontWeight('get-bonus-text','600');
-
-
-    // setBackGroundColor('add-money-div','transparent');
-    // setBackGroundColor('cash-out-div','transparent');
-    // setBackGroundColor('transfer-money-div','transparent');
-    // setBackGroundColor('pay-bill-div','transparent');
-    // setBorder('add-money-div','1px solid rgba(8, 8, 8, 0.1)');
-    // setBorder('cash-out-div','1px solid rgba(8, 8, 8, 0.1)');
-    // setBorder('transfer-money-div','1px solid rgba(8, 8, 8, 0.1)');
-    // setBorder('pay-bill-div','1px solid rgba(8, 8, 8, 0.1)');
-    // setTextColor('add-money-text','black');
-    // setTextColor('cash-out-text','black');
-    // setTextColor('transfer-money-text','black');
-    // setTextColor('pay-bill-text','black');
-    // setFontWeight('add-money-text','400');
-    // setFontWeight('cash-out-text','400');
-    // setFontWeight('transfer-money-text','400');
-    // setFontWeight('pay-bill-text','400');
-
-
+    toggleActive('get-bonus-div');
 
 })   
 
 // Click Pay Bill
 document.getElementById('pay-bill-div').addEventListener('click',function(){
     toggleDisplay('pay-bill-section');
-    toggleActive('pay-bill-div')
+    toggleActive('pay-bill-div');
 
-    // setBackGroundColor('pay-bill-div','rgba(8, 116, 242, 0.05)');
-    // setBorder('pay-bill-div','2px solid #0874F2');
-    // setTextColor('pay-bill-text','#0874F2');
-    // setFontWeight('pay-bill-text','600');
+})
+
+// Click Transaction
+document.getElementById('transaction-div').addEventListener('click',function(){
+    toggleDisplay('transaction-section');
+    toggleActive('transaction-div');
 
 
-    // setBackGroundColor('add-money-div','transparent');
-    // setBackGroundColor('cash-out-div','transparent');
-    // setBackGroundColor('transfer-money-div','transparent');
-    // setBackGroundColor('get-bonus-div','transparent');
-    // setBorder('add-money-div','1px solid rgba(8, 8, 8, 0.1)');
-    // setBorder('cash-out-div','1px solid rgba(8, 8, 8, 0.1)');
-    // setBorder('transfer-money-div','1px solid rgba(8, 8, 8, 0.1)');
-    // setBorder('get-bonus-div','1px solid rgba(8, 8, 8, 0.1)');
-    // setTextColor('add-money-text','black');
-    // setTextColor('cash-out-text','black');
-    // setTextColor('transfer-money-text','black');
-    // setTextColor('get-bonus-text','black');
-    // setFontWeight('add-money-text','400');
-    // setFontWeight('cash-out-text','400');
-    // setFontWeight('transfer-money-text','400');
-    // setFontWeight('get-bonus-text','400');
+    
 
+    const cardContainer=document.getElementById('card-container')
+    cardContainer.innerText="";
+    for(const data of transcations)
+    {
+        const div=document.createElement('div');
+        div.innerHTML=`
+         <div class="card-container bg-white p-4 flex justify-between items-center rounded-xl mt-3">
+         
+            <div class="flex justify-between items-center">
+                <div class="img-container bg-[#f4f5f7] rounded-full p-3">
+                <img src="./assets/wallet1.png" alt="" class="mx-auto">
+                </div>
+                <div class="details-container ml-[15px]">
+                <h1>${data.name}</h1>
+                <p>${data.date}</p>
+                </div>
+            </div>
+
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+        
+        </div>
+        `
+
+        cardContainer.appendChild(div);
+    }
 })

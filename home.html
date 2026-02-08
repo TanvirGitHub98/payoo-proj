@@ -57,44 +57,45 @@
 
       <div class="card-container mt-[20px] grid grid-cols-3 gap-5 p-[10px]">
         <div  id="add-money-div"
-          class="all-div card  flex items-center px-[10px] py-[20px] rounded-[12px] border-2 border-[#0874F2] bg-[#0874F2]/5 "
+          class="all-div card border border-[#080808]/10  flex items-center px-[10px] py-[20px] rounded-[12px]  " 
         >
-          <img src="./assets/wallet1.png" alt="" class="h-[50px] w-[50px]" />
-          <h1 id="add-money-text" class="text-[#0874F2] font-semibold text-[1rem]">Add Money</h1>
+          <img src="./assets/wallet1.png" alt="" class="mx-auto" />
+          <h1 id="add-money-text">Add Money</h1>
         </div>
         <div  id="cash-out-div"
           class="all-div card border border-[#080808]/10 flex items-center px-[10px] py-[20px] rounded-[12px]"
         >
-          <img src="./assets/send1.png" alt="" class="h-[40px] w-[40px]" />
+          <img src="./assets/send1.png" alt="" class="mx-auto" />
           <h1 id="cash-out-text">Cashout</h1>
         </div>
         <div id="transfer-money-div"
           class="all-div card border border-[#080808]/10 flex items-center px-[10px] py-[20px] rounded-[12px]"
         >
-          <img src="./assets/money1.png" alt="" class="h-[40px] w-[40px]" />
+          <img src="./assets/money1.png" alt="" class="mx-auto" />
           <h1 id="transfer-money-text">Transfer Money</h1>
         </div>
         <div
           id="get-bonus-div"
           class="all-div card border border-[#080808]/10 flex items-center px-[10px] py-[20px] rounded-[12px]"
         >
-          <img src="./assets/bonus1.png" alt="" class="h-[40px] w-[40px]" />
+          <img src="./assets/bonus1.png" alt="" class="mx-auto" />
           <h1 id="get-bonus-text">Get Bonus</h1>
         </div>
         <div
           id="pay-bill-div"
           class="all-div card border border-[#080808]/10 flex items-center px-[10px] py-[20px] rounded-[12px]"
         >
-          <img src="./assets/purse1.png" alt="" class="h-[40px] w-[40px]" />
+          <img src="./assets/purse1.png" alt="" class="mx-auto" />
           <h1 id="pay-bill-text">Pay Bill</h1>
         </div>
         <div
+          id="transaction-div"
           class="all-div card border border-[#080808]/10 flex items-center px-[10px] py-[20px] rounded-[12px]"
         >
           <img
             src="./assets/transaction1.png"
             alt=""
-            class="h-[40px] w-[40px]"
+            class="mx-auto"
           />
           <h1>Transactions</h1>
         </div>
@@ -105,7 +106,7 @@
 
       <!-- Add Money Feature -->
       <section id="Add-money-section"
-        class="allForm add-money-section max-w-lg mx-auto rounded-b-xl mt-[30px] pb-10"
+        class="allForm add-money-section max-w-lg mx-auto rounded-b-xl mt-[30px] pb-10" style="display: none;"
       >
         <h1 class="font-bold text-[1.25rem] mb-[16px]">Add Money</h1>
         <form class="bg-white p-[24px] rounded-xl">
@@ -410,6 +411,23 @@
           </button>
         </form>
     </section>
+
+    <section id="transaction-section" class="allForm add-money-section max-w-lg mx-auto rounded-b-xl mt-[30px] pb-10" style="display: none;">
+        <div class="flex justify-between items-center">
+          <h1 class="font-bold text-[1.25rem] mb-[16px]">Transaction History</h1>
+          <p class="text-[#08080880]">View All</p>
+        </div>
+        <div id="card-container" >
+
+        </div>
+
+    </section>
+
+    <section id="latest-transaction" class="allForm add-money-section max-w-lg mx-auto rounded-b-xl mt-[30px] pb-10">
+       <h1 class="font-bold text-[1.25rem] mb-[16px]">Latest Transaction</h1>
+
+    </section>
+
 
 
 
